@@ -7,37 +7,9 @@ from pprint import pprint
 import inspect
 from collections import OrderedDict
 import json
-#Your first task will be to download web pages.
-# The requests package comes to the rescue.
-# It aims to be an easy-to-use tool for doing all things HTTP in Python.
-
-#The simple_get() function accepts a single url argument.
-# It then makes a GET request to that URL.
-# If nothing goes wrong, you end up with the raw HTML content for the page you requested.
-# If there were any problems with your request (like the URL is bad, or the remote server is down), then your function returns None.
-# You may have noticed the use of the closing() function in your definition of simple_get().
-# The closing() function ensures that any network resources are freed when they go out of scope in that with block.
-# Using closing() like that is good practice and helps to prevent fatal errors and network timeouts.
-
-#Once you have raw HTML in front of you, you can start to select and extract.
-# For this purpose, you will be using BeautifulSoup.
-# The BeautifulSoup constructor parses raw HTML strings and produces an object that mirrors the HTML document’s structure.
-# The object includes a slew of methods to select, view, and manipulate DOM nodes and text content.
-
-#BeautifulSoup accepts multiple back-end parsers, but the standard back-end is 'html.parser',
-# which you supply here as the second argument.
-
-#The select() method on your html object lets you use CSS selectors to locate elements in the document.
-# In the above case, html.select('p') returns a list of paragraph elements.
-# Each p has HTML attributes that you can access like a dict. In the line if p['id'] == 'walrus', for example,
-# you check if the id attribute is equal to the string 'walrus', which corresponds to <p id="walrus"> in the HTML.
-
-#Use json.dumps to pretty print your data
 
 def simple_get(url):
-    """Attempts to get the content at 'url' by making an HTTP GET request.
-    If the content-type of response is some kind of HTMS/XML, return the text content,
-    otherwise return None."""
+    """Attempts to get the content at 'url' by making an HTTP GET request."""
 
     try:
         with closing(get(url, stream = True)) as resp:
@@ -56,12 +28,10 @@ def is_good_response(resp):
     return (resp.status_code == 200 and content_type is not None and content_type.find('html') > -1)
 
 def log_error(e):
-    """Prints the log errors"""
     print(e)
 
 def store_all_data():
-    """Downloads the page where expected data are found
-    and returns a list of strings."""
+    """Downloads the page where expected data are found and returns a list of strings."""
 
     input_number = 20
     url = "https://news.ycombinator.com/"
@@ -77,7 +47,7 @@ def store_all_data():
     raise Exception('Error retreiving contents at {}'.format(url))
 
 def find_data(response, html):
-    # Finds points, author names, comments and ranks from html.
+    """ Finds points, author names, comments and ranks from html."""
     point = html.find_all('span', attrs={'class': re.compile("^scor")})
     author = html.find_all('a', attrs={'href': re.compile("^user")})
     comment = html.find_all('a', text= re.compile("comment|comments|discuss"))
@@ -86,7 +56,7 @@ def find_data(response, html):
     return html, point, author, comment, rank
 
 def make_list_of_HNdata_dictionaries(input_number, html, points, authors, comments, ranks):
-    # Makes a list of all the data that retrieves from the html.
+    """ Makes a list of all the data that retrieves from the html."""
     hacker_news_list = []
     for pos_a, a in enumerate(html.find_all('a', attrs={'href': re.compile("^htt")}, limit= input_number + 1)[1:]):
             hacker_dict =  OrderedDict()
@@ -103,18 +73,12 @@ def make_list_of_HNdata_dictionaries(input_number, html, points, authors, commen
             hacker_news_list.append(hacker_dict)
     return hacker_news_list
 
-    '''for i in hacker_news_list:
-        print(i)
-    return hacker_news_list'''
 
-#def make_output_form():
 
 def print_engine(store_all_data):
-    # Makes the desires output format.
-    print("[")
+    """ Creates the desired output format."""
     for d in store_all_data():
         print(json.dumps(d, indent=1) + "," if d != store_all_data()[-1] else json.dumps(d, indent=1))
-    print("]")
 
 print_engine(store_all_data)
 
