@@ -34,3 +34,5 @@ otherwise return None."""
 """ Finds points, author names, comments and ranks from html."""
 """ Makes a list of all the data that retrieved from the html."""
 # Creates the desired output format.
+
+Type "python hacker_news_scraping.py" in a terminal, to run.
