@@ -44,20 +44,18 @@ def get_user_input():
         print("You value is correct")
         return num_Of_URLs
     else:
-        print("Please enter a positive integer, lesser than 101.")
+        print("Please enter a positive integer, in the range of 1 to 100.")
         get_user_input()
 
 
 def store_all_data(user_input):
     """Downloads the page where expected data are found and returns a list of strings."""
-    print(user_input)
     url = "https://news.ycombinator.com/"
     response = simple_get(url)
     html = BeautifulSoup(response, 'html.parser')
-    input_number = 4
     if response is not None:
         html, point, author, comment, rank = find_data(response, html)
-        HN_list = make_list_of_HNdata_dictionaries(input_number, html, point, author, comment, rank)
+        HN_list = make_list_of_HNdata_dictionaries(user_input, html, point, author, comment, rank)
         return HN_list
 
     # Raise an exception if we failed to get any data from the url.
@@ -100,4 +98,4 @@ def add(x,y):
     return x + y
 
 an_input = get_user_input()
-print_engine(store_all_data,an_input)
+print_engine(store_all_data, an_input)
