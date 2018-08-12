@@ -80,7 +80,8 @@ def print_engine(store_all_data):
     for d in store_all_data():
         print(json.dumps(d, indent=1) + "," if d != store_all_data()[-1] else json.dumps(d, indent=1))
 
-print_engine(store_all_data)
-
 def add(x,y):
+    """ For unit testing purposes only."""
     return x + y
+
+print_engine(store_all_data)
