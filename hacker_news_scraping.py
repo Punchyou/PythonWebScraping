@@ -35,17 +35,19 @@ def get_user_input():
     try:
         num_Of_URLs = int(input("Enter the number of URLs to be fetched: "))
     except ValueError:
-        print(" Please enter an integer.")
+        pass
+    if not isinstance(num_Of_URLs, int) or num_Of_URLs <= 0:
+        print("Please provide a positive integer.")
         get_user_input()
     return num_Of_URLs
 
-def store_all_data(get_user_input):
+def store_all_data(user_input):
     """Downloads the page where expected data are found and returns a list of strings."""
-    print(get_user_input)
+    print(user_input)
     url = "https://news.ycombinator.com/"
     response = simple_get(url)
     html = BeautifulSoup(response, 'html.parser')
-    input_number = 20
+    input_number = 4
     if response is not None:
         html, point, author, comment, rank = find_data(response, html)
         HN_list = make_list_of_HNdata_dictionaries(input_number, html, point, author, comment, rank)
@@ -81,15 +83,14 @@ def make_list_of_HNdata_dictionaries(input_number, html, points, authors, commen
             hacker_news_list.append(hacker_dict)
     return hacker_news_list
 
-
-
-def print_engine(store_all_data):
+def print_engine(store_all_data, an_input):
     """ Creates the desired output format."""
-    for d in store_all_data():
-        print(json.dumps(d, indent=1) + "," if d != store_all_data()[-1] else json.dumps(d, indent=1))
+    for d in store_all_data(an_input):
+        print(json.dumps(d, indent=1) + "," if d != store_all_data(an_input)[-1] else json.dumps(d, indent=1))
 
 def add(x,y):
     """ For unit testing purposes only."""
     return x + y
 
-print_engine(store_all_data(get_user_input()))
+an_input = get_user_input()
+print_engine(store_all_data,an_input)
