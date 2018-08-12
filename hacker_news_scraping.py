@@ -30,14 +30,22 @@ def is_good_response(resp):
 def log_error(e):
     print(e)
 
-def store_all_data():
-    """Downloads the page where expected data are found and returns a list of strings."""
+def get_user_input():
+    """ Gets the number of urls from user."""
+    try:
+        num_Of_URLs = int(input("Enter the number of URLs to be fetched: "))
+    except ValueError:
+        print(" Please enter an integer.")
+        get_user_input()
+    return num_Of_URLs
 
-    input_number = 20
+def store_all_data(get_user_input):
+    """Downloads the page where expected data are found and returns a list of strings."""
+    print(get_user_input)
     url = "https://news.ycombinator.com/"
     response = simple_get(url)
     html = BeautifulSoup(response, 'html.parser')
-    
+    input_number = 20
     if response is not None:
         html, point, author, comment, rank = find_data(response, html)
         HN_list = make_list_of_HNdata_dictionaries(input_number, html, point, author, comment, rank)
@@ -84,4 +92,4 @@ def add(x,y):
     """ For unit testing purposes only."""
     return x + y
 
-print_engine(store_all_data)
+print_engine(store_all_data(get_user_input()))
