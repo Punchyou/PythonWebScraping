@@ -1,2 +1,0 @@
-for i in range(882, 1001):
-    print(i+2)
