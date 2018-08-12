@@ -31,15 +31,22 @@ def log_error(e):
     print(e)
 
 def get_user_input():
-    """ Gets the number of urls from user."""
-    try:
-        num_Of_URLs = int(input("Enter the number of URLs to be fetched: "))
-    except ValueError:
-        pass
-    if not isinstance(num_Of_URLs, int) or num_Of_URLs <= 0:
-        print("Please provide a positive integer.")
+    """ Gets the number of urls from user and promts the user again if its not valid."""
+    while True:
+        try:
+            num_Of_URLs = int(input("Enter the number of URLs to be fetched: "))
+        except ValueError:
+            print("Please enter an integer.")
+            continue
+        else:
+            break
+    if num_Of_URLs > 0 and num_Of_URLs <= 100: 
+        print("You value is correct")
+        return num_Of_URLs
+    else:
+        print("Please enter a positive integer, lesser than 101.")
         get_user_input()
-    return num_Of_URLs
+
 
 def store_all_data(user_input):
     """Downloads the page where expected data are found and returns a list of strings."""
