@@ -44,9 +44,9 @@ def make_list_of_HNdata_dictionaries(input_number, html, points, authors, commen
     return hacker_news_list
 
 def validate_fetched_record(rec_titles, rec_authors, rec_URIs, rec_points, rec_comments, rec_ranks):
-    if len(rec_titles) > 256:
+    if not rec_titles or not isinstance(rec_titles, str) or len(rec_titles) > 256:
         return False
-    if len(rec_authors) > 256: 
+    if not rec_authors or not isinstance(rec_authors, str) or len(rec_authors) > 256: 
         return False
     if not isinstance(rec_points, int) or rec_points < 0:
         return False

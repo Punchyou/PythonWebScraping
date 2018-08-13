@@ -45,7 +45,7 @@ def find_data(response, html):
     """ Finds points, author names, comments and ranks from html."""
     point = html.find_all('span', attrs={'class': re.compile("^scor")})
     author = html.find_all('a', attrs={'href': re.compile("^user")})
-    comment = html.find_all('a', text= re.compile("comment|comments|discuss"))
+    comment = html.find_all('a', text= re.compile("^comment|comments|discuss"))
     rank = html.find_all('span', attrs={'class': re.compile("^rank")})
 
     return html, point, author, comment, rank
