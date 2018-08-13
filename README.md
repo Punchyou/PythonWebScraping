@@ -10,7 +10,7 @@ You'll install the packages needed for this project with the pip installer that 
 
 The packages you'll need are:
 
-** Requests
+**Requests
 
 
 ### Prerequisites
