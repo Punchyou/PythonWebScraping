@@ -1,4 +1,4 @@
-###The requests package will be to download web pages, a tool for doing all things HTTP in Python.
+# **The requests package will be to download web pages, a tool for doing all things HTTP in Python.
 
 The simple_get() attempts to get the content at 'url' by making an HTTP GET request.
 The closing() function ensures that any network resources are freed when they go out of scope in that with block.
