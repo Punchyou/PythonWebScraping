@@ -34,8 +34,7 @@ def store_all_data(user_input, HNData):
     html = BeautifulSoup(response, 'html.parser')
     if response is not None:
         html, point, author, comment, rank = find_data(response, html)
-        hn_data = HNData()
-        HN_list = make_list_of_HNdata(user_input, html, point, author, comment, rank, hn_data)
+        HN_list = make_list_of_HNdata(user_input, html, point, author, comment, rank)
         return HN_list
 
     # Raise an exception if we failed to get any data from the url.
