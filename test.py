@@ -3,7 +3,19 @@ import helping_functions as hf
 import unittest
 from HN_Data import HNData
 
-#unittest: https://docs.python.org/3/library/unittest.html#unittest.TestCase.debug
+def initialize_hn_valid_object():
+    hn_data_obj = HNData("Sherlock", "Doyle", "ttps://news.ycombinator.com/", 34, 20, 3)
+    return hn_data_obj
+
+def initialize_hn_obj_invalid_title():
+    hn_data_obj = initialize_hn_valid_object()
+    hn_data_obj.title = ""
+    return hn_data_obj
+
+def initialize_hn_obj_invalid_author():
+    hn_data_obj = initialize_hn_valid_object()
+    hn_data_obj.author = ""
+    return hn_data_obj
 
 """Test the simple_get without using unittest"""
 
@@ -15,10 +27,15 @@ print(no_html is None)'''
 
 class TestHNS(unittest.TestCase):
     """ A class for testing the hacker_news_scraping data."""
-    def test_validate_fetched_record_title(self):
-        """ Tests if the fetched name has the proper form."""
-        HNData().title = "lkdjfglkj"
-        result = hf.validate_fetched_record(HNData())
+    def test_validate_fetched_record_with_invalid_title(self):
+        
+        """Arrange"""
+        hn_data_obj = initialize_hn_obj_invalid_title()
+
+        """Act"""
+        result = hf.validate_fetched_record(hn_data_obj)
+
+        """Assert"""
         self.assertEqual(result, True, msg= "One or more fetched data don't have the required form.")
         
         
