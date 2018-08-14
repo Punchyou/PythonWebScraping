@@ -2,11 +2,10 @@ from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
-import re
-from pprint import pprint
-import inspect
+from re import compile
 import json
 from helping_functions import*
+from HN_Data import HNData
 
 def simple_get(url):
     """Attempts to get the content at 'url' by making an HTTP GET request."""
@@ -28,14 +27,15 @@ def is_good_response(resp):
 def log_error(e):
     print(e)
 
-def store_all_data(user_input):
+def store_all_data(user_input, HNData):
     """Downloads the page where expected data are found and returns a list of strings."""
     url = "https://news.ycombinator.com/"
     response = simple_get(url)
     html = BeautifulSoup(response, 'html.parser')
     if response is not None:
         html, point, author, comment, rank = find_data(response, html)
-        HN_list = make_list_of_HNdata_dictionaries(user_input, html, point, author, comment, rank)
+        hn_data = HNData()
+        HN_list = make_list_of_HNdata_dictionaries(user_input, html, point, author, comment, rank, hn_data)
         return HN_list
 
     # Raise an exception if we failed to get any data from the url.
@@ -50,13 +50,13 @@ def find_data(response, html):
 
     return html, point, author, comment, rank
 
-def print_engine(store_all_data, an_input):
+def print_engine(store_all_data, an_input, HNData):
     """ Creates the output format."""
-    print(json.dumps(store_all_data(an_input), indent=2))
+    print(json.dumps(store_all_data(an_input, HNData), indent=2))
 
 def add(x,y):
     """ For unit testing purposes only."""
     return x + y
 
 an_input = get_user_input()
-print_engine(store_all_data, an_input)
+print_engine(store_all_data, an_input, HNData)

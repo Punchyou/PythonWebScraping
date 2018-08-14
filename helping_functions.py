@@ -17,29 +17,29 @@ def get_user_input():
         print("Please enter a positive integer, in the range of 1 to 100.")
 
 
-def make_list_of_HNdata_dictionaries(input_number, html, points, authors, comments, ranks):
+def make_list_of_HNdata_dictionaries(input_number, html, points, authors, comments, ranks, hn_data):
     """ Makes a list of all the data that retrieves from the html."""
     hacker_news_list = []
     for pos_a, a in enumerate(html.find_all('a', attrs={'href': re.compile("^htt")}, limit= input_number + 1)[1:]):
-        rec_titles = a.text
-        rec_URIs = a.get('href').strip().encode("utf-8").decode("utf-8")
-        rec_authors = authors[pos_a].text
-        rec_points = int(points[pos_a].text[:-7])
-        rec_comments = (
+        hn_data.title = a.text
+        hn_data.uri = a.get('href').strip().encode("utf-8").decode("utf-8")
+        hn_data.author = authors[pos_a].text
+        hn_data.points = int(points[pos_a].text[:-7])
+        hn_data.comments = (
         0 if comments[pos_a+1].text[-7:] == "discuss"
         else int(comments[pos_a+1].text.encode("ascii", "ignore")[:-7].decode("utf-8")) if comments[pos_a+1].text[-7:] == "comment"
         else int(comments[pos_a+1].text.encode("ascii", "ignore")[:-8].decode("utf-8"))
         )
-        rec_ranks = int(ranks[pos_a].text[:-1])
-        if not validate_fetched_record(rec_titles, rec_authors, rec_URIs, rec_points, rec_comments, rec_ranks):
+        hn_data.rank = int(ranks[pos_a].text[:-1])
+        if not validate_fetched_record(hn_data.title, hn_data.author, hn_data.uri, hn_data.points, hn_data.comments, hn_data.rank):
             continue
         hacker_dict =  OrderedDict()
-        hacker_dict["title"] = rec_titles
-        hacker_dict["uri"] = rec_URIs
-        hacker_dict["author"] = rec_authors
-        hacker_dict["points"] = rec_points
-        hacker_dict["comments"] = rec_comments
-        hacker_dict["rank"] = rec_ranks
+        hacker_dict["title"] = hn_data.title
+        hacker_dict["uri"] = hn_data.uri
+        hacker_dict["author"] = hn_data.author
+        hacker_dict["points"] = hn_data.points
+        hacker_dict["comments"] = hn_data.comments
+        hacker_dict["rank"] = hn_data.rank
         hacker_news_list.append(hacker_dict)
     return hacker_news_list
 
