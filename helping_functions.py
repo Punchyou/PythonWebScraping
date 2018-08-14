@@ -31,28 +31,21 @@ def make_list_of_HNdata_dictionaries(input_number, html, points, authors, commen
         else int(comments[pos_a+1].text.encode("ascii", "ignore")[:-8].decode("utf-8"))
         )
         hn_data.rank = int(ranks[pos_a].text[:-1])
-        if not validate_fetched_record(hn_data.title, hn_data.author, hn_data.uri, hn_data.points, hn_data.comments, hn_data.rank):
+        if not validate_fetched_record(hn_data):
             continue
-        hacker_dict =  OrderedDict()
-        hacker_dict["title"] = hn_data.title
-        hacker_dict["uri"] = hn_data.uri
-        hacker_dict["author"] = hn_data.author
-        hacker_dict["points"] = hn_data.points
-        hacker_dict["comments"] = hn_data.comments
-        hacker_dict["rank"] = hn_data.rank
-        hacker_news_list.append(hacker_dict)
+        hacker_news_list.append(hn_data.__dict__)
     return hacker_news_list
 
-def validate_fetched_record(rec_titles, rec_authors, rec_URIs, rec_points, rec_comments, rec_ranks):
-    if not rec_titles or not isinstance(rec_titles, str) or len(rec_titles) > 256:
+def validate_fetched_record(hn_data):
+    if not hn_data.title or not isinstance(hn_data.title, str) or len(hn_data.title) > 256:
         return False
-    if not rec_authors or not isinstance(rec_authors, str) or len(rec_authors) > 256: 
+    if not hn_data.author or not isinstance(hn_data.author, str) or len(hn_data.author) > 256: 
         return False
-    if not isinstance(rec_points, int) or rec_points < 0:
+    if not isinstance(hn_data.points, int) or hn_data.points < 0:
         return False
-    if not isinstance(rec_comments, int) or rec_comments < 0:
+    if not isinstance(hn_data.comments, int) or hn_data.comments < 0:
         return False
-    if not isinstance(rec_ranks, int) or rec_ranks < 0:
+    if not isinstance(hn_data.rank, int) or hn_data.rank < 0:
         return False
     regex = re.compile(
         r'^(?:http|ftp)s?://' # http:// or https://
@@ -61,6 +54,6 @@ def validate_fetched_record(rec_titles, rec_authors, rec_URIs, rec_points, rec_c
         r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
         r'(?::\d+)?' # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
-    if not re.match(regex, rec_URIs):
+    if not re.match(regex, hn_data.uri):
         return False
     return True
