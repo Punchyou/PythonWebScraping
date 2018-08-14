@@ -54,10 +54,6 @@ def print_engine(store_all_data):
     print(json.dumps(store_all_data, indent = 2))
     #print(json.dumps(store_all_data(an_input, HNData), indent=2))
 
-def add(x,y):
-    """ For unit testing purposes only."""
-    return x + y
-
 an_input = get_user_input()
 sad = store_all_data(an_input, HNData)
 print_engine(sad)
