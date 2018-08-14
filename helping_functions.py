@@ -17,7 +17,7 @@ def get_user_input():
         print("Please enter a positive integer, in the range of 1 to 100.")
 
 
-def make_list_of_HNdata_dictionaries(input_number, html, points, authors, comments, ranks, hn_data):
+def make_list_of_HNdata(input_number, html, points, authors, comments, ranks, hn_data):
     """ Makes a list of all the data that retrieves from the html."""
     hacker_news_list = []
     for pos_a, a in enumerate(html.find_all('a', attrs={'href': re.compile("^htt")}, limit= input_number + 1)[1:]):
@@ -47,6 +47,10 @@ def validate_fetched_record(hn_data):
         return False
     if not isinstance(hn_data.rank, int) or hn_data.rank < 0:
         return False
+    validate_uri_record(hn_data)
+    return True
+
+def validate_uri_record(hn_data):
     regex = re.compile(
         r'^(?:http|ftp)s?://' # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
@@ -56,4 +60,3 @@ def validate_fetched_record(hn_data):
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
     if not re.match(regex, hn_data.uri):
         return False
-    return True

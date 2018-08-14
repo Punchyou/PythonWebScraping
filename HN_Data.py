@@ -1,10 +1,9 @@
 class HNData():
 
     def __init__(self):
-        self.title = ""
-        self.author = ""
-        self.uri = ""
-        self.points = ""
-        self.comments = ""
-        self.rank = ""
-
+        self.title = "title"
+        self.author = "author"
+        self.uri = "uri"
+        self.points = "points"
+        self.comments = "comments"
+        self.rank = "rank"

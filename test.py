@@ -1,6 +1,7 @@
 import hacker_news_scraping as hns
 import helping_functions as hf
 import unittest
+import HN_Data
 
 #unittest: https://docs.python.org/3/library/unittest.html#unittest.TestCase.debug
 
