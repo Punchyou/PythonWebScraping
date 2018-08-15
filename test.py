@@ -54,19 +54,7 @@ class TestHNS(unittest.TestCase):
         """ Tests if the author's name is not too long."""
         hn_data_obj = initialize_hn_obj_invalid_author_name_too_long()
         result = hf.validate_fetched_record(hn_data_obj)
-        self.assertEqual(result, False, msg= "The author's name can't be more then 256 characters.")
-    
-    def test_validate_fetched_record_with_invalid_uri_not_starting_with_http_or_https(self):
-        """ Tests if the uri starts with http or https."""
-        hn_data_obj = initialize_hn_obj_invalid_uri_not_starting_with_http_or_https()
-        result = hf.validate_fetched_record(hn_data_obj)
-        self.assertEqual(result, False, msg= "The uri must start with http or https.")    
-    
-    def test_validate_fetched_record_with_invalid_uri_domain_name(self):
-        """ Tests if the uri domain name has the rights characters."""
-        hn_data_obj = initialize_hn_obj_invalid_uri_domain_name()
-        result = hf.validate_fetched_record(hn_data_obj)
-        self.assertEqual(result, False, msg= "The uri must start with http or https.")    
+        self.assertEqual(result, False, msg= "The author's name can't be more then 256 characters.")   
     
     def test_validate_fetched_record_with_invalid_points_characters(self):
         """ Tests if the points are characters."""

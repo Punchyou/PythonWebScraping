@@ -41,18 +41,6 @@ def initialize_hn_obj_invalid_author_name_too_long():
     hn_data_obj.author = "I had seen little of Holmes lately. My marriage had drifted us away from each other. My own complete happiness, and the home-centred interests which rise up around the man who first finds himself master of his own establishment, were sufficient to absorb all my attention, while Holmes..."
     return hn_data_obj
 
-def initialize_hn_obj_invalid_uri_not_starting_with_http_or_https():
-    """ Initialize an object with invalid uri, not starting with http or https."""
-    hn_data_obj = initialize_hn_valid_object()
-    hn_data_obj.uri = "hwkjk://news.ycombinator.com/"
-    return hn_data_obj
-
-def initialize_hn_obj_invalid_uri_domain_name():
-    """ Initialize an object with invalid uri, the domain name don't have the right characters."""
-    hn_data_obj = initialize_hn_valid_object()
-    hn_data_obj.uri = "https://news#.yc!omb@inator.com/"
-    return hn_data_obj
-
 def initialize_hn_obj_invalid_points_character():
     """ Initialize an object with points as characters."""
     hn_data_obj = initialize_hn_valid_object()
