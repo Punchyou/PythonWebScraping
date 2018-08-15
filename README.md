@@ -6,7 +6,7 @@ This is a repo about basic web scraping, with Python. This application uses the 
 
 You'll have to install Python 3.7 on your system. Download the appropriate for your OS installer from https://www.python.org/downloads/release/python-370/.
 
-You'll install the packages needed for this project with the pip installer that allows you to install, reinstall, or uninstall PyPI packages, which is already installed with Python 3.7.
+You'll install the packages needed for this project with the pip installer that allows you to install, reinstall, or uninstall PyPI packages. Pip is already installed with Python 3.7.
 
 
 ### The packages you'll need are:
@@ -14,6 +14,14 @@ You'll install the packages needed for this project with the pip installer that 
 **Requests**
 
 Requests is an Apache2 Licensed HTTP library, written in Python. It is designed to be used by humans to interact with the language. This means you don’t have to manually add query strings to URLs, or form-encode your POST data. We need it in the project to get the content at 'url' by making an HTTP GET request, with requests.get() function.
+```
+pip install requests
+```
+or
+```
+pip3 install requests
+```
+might also work.
 
 **Contextlib**
 
