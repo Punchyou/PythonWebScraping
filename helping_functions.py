@@ -1,4 +1,3 @@
-from collections import OrderedDict
 import re
 from HN_Data import HNData
 
@@ -23,10 +22,10 @@ def make_list_of_HNdata(input_number, html, points, authors, comments, ranks):
     hacker_news_list = []
     for pos_a, a in enumerate(html.find_all('a', attrs={'href': re.compile("^htt")}, limit= input_number + 1)[1:]):
         hn_data = HNData(a.text, authors[pos_a].text, a.get('href').strip().encode("utf-8").decode("utf-8"), int(points[pos_a].text[:-7]), (
-        0 if comments[pos_a+1].text[-7:] == "discuss"
-        else int(comments[pos_a+1].text.encode("ascii", "ignore")[:-7].decode("utf-8")) if comments[pos_a+1].text[-7:] == "comment"
-        else int(comments[pos_a+1].text.encode("ascii", "ignore")[:-8].decode("utf-8"))
-        ), int(ranks[pos_a].text[:-1]))
+            0 if comments[pos_a+1].text[-7:] == "discuss"
+            else int(comments[pos_a+1].text.encode("ascii", "ignore")[:-7].decode("utf-8")) if comments[pos_a+1].text[-7:] == "comment"
+            else int(comments[pos_a+1].text.encode("ascii", "ignore")[:-8].decode("utf-8"))
+            ), int(ranks[pos_a].text[:-1]))
         if not validate_fetched_record(hn_data):
             continue
         hacker_news_list.append(hn_data.__dict__)

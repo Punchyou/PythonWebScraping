@@ -52,8 +52,7 @@ def find_data(response, html):
 def print_engine(store_all_data):
     """ Creates the output format."""
     print(json.dumps(store_all_data, indent = 2))
-    #print(json.dumps(store_all_data(an_input, HNData), indent=2))
 
 an_input = get_user_input()
-sad = store_all_data(an_input, HNData)
-print_engine(sad)
+s_a_d = store_all_data(an_input, HNData)
+print_engine(s_a_d)
