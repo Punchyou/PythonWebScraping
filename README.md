@@ -6,55 +6,65 @@ This is a repo about basic web scraping, with Python. This application uses the 
 
 You'll have to install Python 3.7 on your system. Download the appropriate for your OS installer from https://www.python.org/downloads/release/python-370/.
 
-You'll install the packages needed for this project with the pip installer that allows you to install, reinstall, or uninstall PyPI packages, which is already installed with Python 3.7.
+You'll install the packages needed for this project with the pip installer that allows you to install, reinstall, or uninstall PyPI packages. Pip is already installed with Python 3.7.
 
 
 ### The packages you'll need are:
 
-**Requests**
+**requests**
 
-Requests is an Apache2 Licensed HTTP library, written in Python. It is designed to be used by humans to interact with the language. This means you don’t have to manually add query strings to URLs, or form-encode your POST data. We need it in the project to get the content at 'url' by making an HTTP GET request, with requests.get() function.
+Requests library is designed to be used by humans to interact with the language. We need it in the project to get the content at 'url' by making an HTTP GET request, with requests.get() function.
 
-**Contextlib**
+To install this module, type on your terminal:
+```
+pip install requests
+```
+For this packages (and for the next packages),
+```
+pip3 install requests
+```
+might also work.
+
+**contextlib**
 
 Contextlib provides utilities for common tasks involving the with statement, that "sets things up" and "tear things down" automatically, when needed. The contextlib.closing() function is used here to ensure that any network resources are freed when they go out of scope in a with block.
 
+For installation:
+```
+pip install contectlib
+```
+
 **bs4**
 
-Beautiful Soup library is a toolkit for dissecting a document and extracting what you need. We use the bs4.BeautifulSoup function to parse the HTML.
+Beautiful Soup library is a toolkit for dissecting a document and extracting what you need. We ned the bs4.BeautifulSoup function to parse the HTML.
 
-**Re**
+Type on your terminal
+```
+pip install bs4
+```
+to install it.
 
-We use here the re Regular expressions in this project returns the "compiled" regular expression object with re.compiled() function, which find_all consumes.
+**re**
+
+We need the re regular expressions in this project returns the "compiled" regular expression object with re.compiled() function, which find_all consumes.
+
+Type on your terminal
+```
+pip install re
+```
+to install it.
 
 **json**
 
+We need the json library here, for storing the data in the JSON format, with the json.dumps() function.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
+Type on your terminal
 ```
-Give examples
+pip install json
 ```
+to install it.
 
----To be continued
+**collections**
+This module implements specialized container alternative datatypes. We need the collections.OrderedDict() function to initialize an ordered dictionary.
 
-Info
-
-The simple_get() attempts to get the content at 'url' by making an HTTP GET request.
-The closing() function ensures that any network resources are freed when they go out of scope in that with block.
-
-To start selecting and extracting, we use the BeautifulSoup library. 
-The BeautifulSoup constructor parses raw HTML strings and produces an object that mirrors the HTML document’s structure.
-The standard back-end parser is 'html.parser'.
-
-The use of json.dumps is for pretty printing the data.
-
-"""Returns True if the response seems to be HTML, False otherwise."""
-"""Downloads the page where expected data are found and returns a list of strings."""
-""" Finds points, author names, comments and ranks from html."""
-""" Makes a list of all the data that retrieved from the html."""
-print_engine() Creates the desired output format.
-
-Type "python hacker_news_scraping.py" in a terminal, to run.
+The main file of this project is hacker_news_scraping.py. Type "py hacker_news_scraping.py" in a terminal, to run it. Type also "py test.py" to run the tests.
