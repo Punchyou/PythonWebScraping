@@ -68,3 +68,35 @@ to install it.
 This module implements specialized container alternative datatypes. We need the collections.OrderedDict() function to initialize an ordered dictionary.
 
 The main file of this project is hacker_news_scraping.py. Type "py hacker_news_scraping.py" in a terminal, to run it. Type also "py test.py" to run the tests.
+
+
+## Run the project
+Type in your terminal:
+
+```sh
+python hacker_news_scraping.py
+```
+You will be prompted with: `Enter the number of URLs to be fetched`. Type an integer.
+
+The expected output is:
+```sh
+Enter the number of URLs to be fetched: 2
+[
+  {
+    "title": "New alternatives to HSL and HSV that better match color perception",
+    "author": "bjornornorn",
+    "uri": "https://bottosson.github.io/posts/colorpicker/",
+    "points": 150,
+    "comments": 20,
+    "rank": 1
+  },
+  {
+    "title": "2MW Electric Aircraft Engine",
+    "author": "nixass",
+    "uri": "https://www.weflywright.com/technology#motors",
+    "points": 42,
+    "comments": 32,
+    "rank": 2
+  }
+]
+```
